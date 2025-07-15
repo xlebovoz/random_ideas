@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout
 from random import randint
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIcon
 
 
 W = 900
@@ -12,6 +12,8 @@ language = 'ru'
 app = QApplication([])
 main_win = QWidget()
 main_win.setWindowTitle('RANDOM ideas')
+item = 'img/lamp.png'
+main_win.setWindowIcon(QIcon(item))
 
 
 with open('main.qss', 'r', encoding='utf-8') as f:
