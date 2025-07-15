@@ -2,8 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QHBoxLayout
 from random import randint
 from PyQt5.QtGui import QFont
-from ideas_ru import i_ru
-from ideas_en import i_en
+
 
 W = 900
 H = 700
@@ -45,10 +44,19 @@ initial_text = 'Идеи'
 
 def load_ideas():
     global ideas_list
+    ideas_list = []  # очищаем список перед загрузкой
     if language == 'ru':
-        ideas_list = i_ru
+        filename = 'ideas_ru.txt'
     else:
-        ideas_list = i_en
+        filename = 'ideas_en.txt'
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            for line in file:
+                line = line.strip()
+                if line:  # пропускаем пустые строки
+                    ideas_list.append(line)
+    except FileNotFoundError:
+        print(f"Файл {filename} не найден.")
 
 load_ideas()
 
