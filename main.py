@@ -13,28 +13,9 @@ app = QApplication([])
 main_win = QWidget()
 main_win.setWindowTitle('RANDOM ideas')
 
-style_sheet = '''QWidget {
-    background-color: #d3d9eb;
-}
 
-#spinButton {
-    background-color: #2786c5;
-    color: black;
-    border: none;
-    border-radius: 10%;
-    font-size: 26px;
-}
-#spinButton:hover {
-    background-color: #2c8fd1;
-}
-
-#lan {
-    background-color: #2786c5;
-    color: black;
-    border: none;
-    border-radius: 10%;
-}
-'''
+with open('main.qss', 'r', encoding='utf-8') as f:
+    style_sheet = f.read()
 
 app.setStyleSheet(style_sheet)
 
@@ -44,16 +25,16 @@ initial_text = 'Идеи'
 
 def load_ideas():
     global ideas_list
-    ideas_list = []  # очищаем список перед загрузкой
+    ideas_list = []
     if language == 'ru':
-        filename = 'ideas_ru.txt'
+        filename = 'txt_files/ideas_ru.txt'
     else:
-        filename = 'ideas_en.txt'
+        filename = 'txt_files/ideas_en.txt'
     try:
         with open(filename, 'r', encoding='utf-8') as file:
             for line in file:
                 line = line.strip()
-                if line:  # пропускаем пустые строки
+                if line:
                     ideas_list.append(line)
     except FileNotFoundError:
         print(f"Файл {filename} не найден.")
